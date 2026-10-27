@@ -1,0 +1,54 @@
+# Build output and local IDE state
+**/bin/
+**/obj/
+.vs/
+.idea/
+artifacts/
+.artifacts/
+*.user
+*.suo
+*.rsuser
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Local research, captures and diagnostic projects
+analysis/
+screenshots/
+captures/
+**/*Verification*/
+**/*Verification.cs
+*.dmp
+hs_err_*
+
+# Original game data and player files
+*.exe
+*.dll
+*.sg3
+*.555
+*.pak
+*.sav
+*.map
+*.eng
+*.bik
+*.smk
+*.wav
+*.mp3
+*.dat
+Pharaoh.inf
+Pharaoh.ini
+Save/
+Maps/
+Data/
+
+# Keep only application artwork among raster images
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.webp
+!src/Pharaoh.Desktop/Assets/Branding/*.png
+!src/Pharaoh.Desktop/Assets/Cursors/*.png

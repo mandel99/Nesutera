@@ -10,9 +10,71 @@ The original game is being studied through reverse engineering, supported by:
 
 - **Ghidra** — disassembly, decompilation, and analysis of the original executable.
 - **REA** — assistance with reverse-engineering research and understanding game systems.
-- **Codex** — assistance with C# implementation, code organization, refactoring, and verification.
+- **Codex** — assistance with C# implementation, code organization, and refactoring.
 
 The original game's behavior is the reference for the new implementation. The aim is to reproduce its rules, simulation, mechanics, interactions, and even relevant quirks, while replacing the legacy implementation with a modern C# codebase.
+
+## Build
+
+The Windows application targets .NET 9. Install the .NET 9 SDK and build from
+the repository root:
+
+```powershell
+dotnet build .\Nesutera.sln -c Release
+```
+
+Create a framework-dependent desktop distribution with:
+
+```powershell
+.\tools\Build-Desktop.ps1 -Publish
+```
+
+The output is `artifacts/desktop/windows/`. The target computer needs the
+.NET 9 Desktop Runtime. Copy **all files** from that output directory into
+your own Pharaoh + Cleopatra 2.1 game directory, alongside the original data,
+then launch **Nesutera.exe**.
+
+## Game data location
+
+Nesutera uses **only the directory containing Nesutera.exe** as the game root.
+The current working directory, command-line paths, registry entries and
+machine-specific installation paths are not used to find another installation.
+
+The existing game layout must remain intact:
+
+```text
+Game/
+  Nesutera.exe
+  Nesutera.dll
+  Pharaoh.Assets.dll
+  Pharaoh.Engine.dll
+  Pharaoh_Text.eng
+  Pharaoh_MM.eng
+  Pharaoh.inf
+  campaign.txt
+  mission1.pak
+  Data/
+  Save/
+  Maps/
+  ...other original game files and published runtime files
+```
+
+Settings, family profiles, saves and custom maps use `Pharaoh.inf`, `Save/`
+and `Maps/` under the same root. That location must be writable to save changes.
+Original game archives, movies, audio, maps and saved games are not included in
+this repository; a user-owned copy of the game is required.
+
+## Current implementation
+
+The code includes the legacy menus and campaign flow, original asset and save
+formats, city rendering, construction previews, housing and migration,
+floodplain simulation, labor recruitment, and the initial food and safety
+systems. The full campaign and all specialized building behavior are still
+under development.
+
+The repository contains the application and shared engine/assets projects.
+Local research output, captures, diagnostic projects and build output are
+excluded.
 
 ## Roadmap
 
